@@ -2,9 +2,6 @@
 
 ---
 
-
-In Egyptian mythology, Sekhmet (means "the powerful one") is a warrior goddess as well as goddess of healing. She is depicted as a lioness, the fiercest hunter known to the Egyptians. It was said that her breath formed the desert. She was seen as the protector of the pharaohs and led them in warfare. [wikipedia](https://en.wikipedia.org/wiki/Sekhmet)
-
 **What is this repo or project?**
 
   - For Twitter, the Sekhmet project represents the foundational tools and building blocks for gaining insights and diagnosing system health in real-time. The first arc of that work is the *Monitor Evaluator*. We are initially sharing the spec for community input, but will be sharing the source code and examples in the not too distant future.
@@ -21,18 +18,31 @@ In Egyptian mythology, Sekhmet (means "the powerful one") is a warrior goddess a
 
   - Make monitoring systems dynamic, facilitate a common monitoring and alerting service that isn't tied to a specific vendor/solution, and give people tools to better understand the behavior and context of their systems *AND* their alerting system. 
 
+**Where does the name come from?**
+
+  - In Egyptian mythology, Sekhmet (means "the powerful one") is a warrior goddess as well as goddess of healing. She is depicted as a lioness, the fiercest hunter known to the Egyptians. It was said that her breath formed the desert. She was seen as the protector of the pharaohs and led them in warfare. [wikipedia](https://en.wikipedia.org/wiki/Sekhmet)
+
+## Sections
+
+1. [Monitor Evaluator](#Monitor%20Evaluator)
+2. [API](#API)
+3. [Examples](#Examples)
+4. [Entities & Concepts](#Entities)
+5. [Contributing](#Contributing)
+6. [Support](#Support)
+7. [Authors](#Authors)
+8. [License](#License)
 
 ##Monitor Evaluator
 
 ---
-
 
  The Monitor Evaluator is an HTTP API for executing ad-hoc validation of a ‘monitor’. This project extracts some of the concepts from MonAlert (the periodic alert evaluation system, a component of our Next Gen Alerting System) for defining and building monitors and alerts, but enables some new functionality:
 
   - Supply custom time-series data to test out alert definition behavior
   - Supply an anchor time to adjust the time period that evaluation should occur (the default is 'now')
   - The 'source' is the key result that is surfaced - results of Aggregate Evaluable's bubble up this information
-  - Support for millisecond and secondly granularity for custom supplied time-series
+  - Support for evaluation of sub-secondly data - down to millisecondly
   - No 'data-source' lock in. We can extend the project to plug-in different data sources to do evaluation against the shared monitor definition. 
   - Query Cost Validation: A monitor will do preflight costing and surface errors when the monitor is too expensive. Cost information is included in detailed execution results.
   - Query Execution Time. Detailed results show how long each query took vs cost. This will improve visibility in understanding trends to make the alerting/querying systems more stable.
@@ -41,7 +51,7 @@ In Egyptian mythology, Sekhmet (means "the powerful one") is a warrior goddess a
   - Data Consistency Checks: Evaluation will periodically re-evaluate and compare results as a metric 
   - Multiple Data Sources: You can define queries that retrieve data from different time series sources. Be careful to ensure that the ‘source_id’ generation is normalized between time series sources, otherwise monitors may not behave as expected.
 
-##The API
+##API
 
 The evaluation API contains a single, stateless POST request
 
@@ -67,7 +77,9 @@ __PLEASE NOTE__ this API is in flux and subject to change based on internal requ
 
 *Ex:* `POST /monitor/evaluator?detail=source&sort_desc=false`
 
-Let's take a look at some examples.
+## Examples
+
+---
 
 ###A Simple Monitor
 
@@ -1010,15 +1022,17 @@ __Response__
 }
 ```
 
-#Schema Details
+## Entities
 
-## Time Series
+Here is a detailed look at the entities that make up our API's JSON schema.
+
+### Time Series
 
 A Time Series is a sequence or series of (time, value) pairs. Our common time series format allows for multiple representations of this data. This is to help keep the API human readable, while also allowing for potential optimizations of response size to reduce latency of evaluation. All TimeSeries are expected to supply a 'source_id' - the source identifier for where the metric was emitted - and allow for optional custom context data, for surfacing Time Series Database specific information.
 
 This common Time Series data format is used for representing results, as well as for passing in data for evaluation via the API.
 
-## Sparse
+#### Sparse
 
 A 'Sparse' Time Series represents a time series where the majority of the values are expected to NOT be present for a specific time interval. This format is probably the most commonly used representation for Time Series Databases, so may be the most familiar. This format requires that all (time, value) pairs be explicitly stated.
 
@@ -1071,7 +1085,7 @@ Data Points are represented as an array of [time, value], where time is in epoch
 
 ```
 
-## Dense
+#### Dense
 
 A 'Dense' Time Series represents a time series where the majority of values are expected to be present for a specific time interval. This allows for the timestamp to be implicitly stated in the data, reducing verbosity of the API. This should be the preferred format for humans to send data to the API.
 
@@ -1125,7 +1139,7 @@ Note: The 'NaN' value represents an undefined/missing data point for a given tim
 }
 ```
 
-## Monitor
+### Monitor
 
 ```json
 "monitor": {
@@ -1144,11 +1158,11 @@ Note: The 'NaN' value represents an undefined/missing data point for a given tim
   }
 ```
 
-### Evaluable
+#### Evaluable
 
 Evaluable is an abstract type, meaning something that can be evaluated. There is currently support for two types, Simple and Aggregate.
 
-#### Simple
+##### Simple
 
 A 'Simple' Evaluable is explicitly tied to a query and defines a static threshold
 
@@ -1166,7 +1180,7 @@ A 'Simple' Evaluable is explicitly tied to a query and defines a static threshol
 }
 ```
 
-#### Aggregate
+##### Aggregate
 
 An 'Aggregate' Evaluable is made up of child Evaluable types, where the 'aggregator' function is applied to the results.
 
@@ -1178,11 +1192,11 @@ An 'Aggregate' Evaluable is made up of child Evaluable types, where the 'aggrega
 }
 ```
 
-## Notifications
+### Notifications
 
 Notifications allow for sending context and data from an evaluation to a set of destinations - per level. Below are some examples of configuring different destination types:
 
-### Email
+#### Email
 
 Send an email notification
 
@@ -1201,7 +1215,7 @@ Send an email notification
 }
 ```
 
-### Pagerduty
+#### Pagerduty
 
 Send a notification to Pagerduty's API at the specified integration key. More details on integrations to come.
 
@@ -1212,7 +1226,7 @@ Send a notification to Pagerduty's API at the specified integration key. More de
 }
 ```
 
-### Webhook
+#### Webhook
 
 Send an Evaluation Result payload to a URL
 
