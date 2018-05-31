@@ -32,6 +32,7 @@
 6. [Support](#Support)
 7. [Authors](#Authors)
 8. [License](#License)
+9. [Security](#Security%20Issues)
 
 ##Monitor Evaluator
 
@@ -1258,3 +1259,7 @@ Follow [@twitteross](https://twitter.com/twitteross) on Twitter for updates.
 Copyright 2013-2018 Twitter, Inc.
 
 Licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
+
+## Security Issues?
+
+Please report sensitive security issues via Twitter's bug-bounty program (https://hackerone.com/twitter) rather than GitHub.
