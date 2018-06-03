@@ -34,7 +34,7 @@
 8. [License](#License)
 9. [Security](#Security%20Issues)
 
-##Monitor Evaluator
+## Monitor Evaluator
 
 ---
 
@@ -74,7 +74,7 @@ Licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/
 
 Please report sensitive security issues via Twitter's bug-bounty program (https://hackerone.com/twitter) rather than GitHub.
 
-##API
+## API
 
 The evaluation API contains a single, stateless POST request
 
@@ -84,7 +84,7 @@ HTTP POST /monitor/evaluator
 
 __PLEASE NOTE__ this API is in flux and subject to change based on internal requirements or community feedback. When the API is stable, the URL will include a version (i.e. /1/monitor/evaluator) that will only support non-breaking API changes until the next version. Until that point, expect breaking changes and/or changes to this spec.
 
-####Query Params
+#### Query Params
 
 `include_monitor_def` {boolean} [**default**=false]: Response includes monitor definition
 
@@ -104,7 +104,7 @@ __PLEASE NOTE__ this API is in flux and subject to change based on internal requ
 
 ---
 
-###A Simple Monitor
+### A Simple Monitor
 
 `POST /monitor/evaluator`
 
@@ -166,7 +166,7 @@ __Response__
 
 ```
 
-###A Monitor With Multiple Levels
+### A Monitor With Multiple Levels
 
 `POST /monitor/evaluator?detail=source`
 
@@ -253,7 +253,7 @@ __Response__
 }
 ```
 
-###A Monitor With Different Queries
+### A Monitor With Different Queries
 
 `POST /monitor/evaluator?detail=all`
 
@@ -505,7 +505,7 @@ __Response__
 }
 ```
 
-###A Monitor with Supplied Data
+### A Monitor with Supplied Data
 
 `POST /monitor/evaluator?detail=source`
 
@@ -652,7 +652,7 @@ __Response__
 }
 ```
 
-###A Monitor with Supplied Data that sends test Notifications
+### A Monitor with Supplied Data that sends test Notifications
 
 `POST /monitor/evaluator?detail=source`
 
@@ -845,7 +845,7 @@ __Notification Content__
 
 ![Critical Email](https://github.com/twitter/sekhmet/blob/master/supplied_data_critical_email.png)
 
-###A Monitor with Real Notifications
+### A Monitor with Real Notifications
 
 `POST /monitor/evaluator?detail=source`
 
@@ -958,7 +958,7 @@ __Notification Content__
 ![Critical Email](https://github.com/twitter/sekhmet/blob/master/real_data_critical_email2.png)
 
 
-###A Monitor containing Aggregate Evaluation
+### A Monitor containing Aggregate Evaluation
 
 `POST /monitor/evaluator?detail=source`
 
