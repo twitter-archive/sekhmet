@@ -25,14 +25,13 @@
 ## Sections
 
 1. [Monitor Evaluator](#monitor-evaluator)
-2. [Contributing](#contributing)
-3. [Support](#support)
-4. [Authors](#authors)
-5. [License](#license)
-6. [Security](#security-issues)
-7. [API](#api)
-8. [Examples](#examples)
-9. [Entities & Concepts](#entities)
+2. [Support](#support)
+3. [Authors](#authors)
+4. [License](#license)
+5. [Security](#security-issues)
+6. [API](#api)
+7. [Examples](#examples)
+8. [Entities & Concepts](#entities)
 
 
 ## Monitor Evaluator
