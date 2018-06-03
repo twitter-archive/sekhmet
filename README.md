@@ -52,6 +52,28 @@
   - Data Consistency Checks: Evaluation will periodically re-evaluate and compare results as a metric 
   - Multiple Data Sources: You can define queries that retrieve data from different time series sources. Be careful to ensure that the ‘source_id’ generation is normalized between time series sources, otherwise monitors may not behave as expected.
 
+## Support
+
+File an issue on GitHub
+
+## Authors
+
+* Ian Bennett <https://github.com/enbnt>
+
+A full list of [contributors](https://github.com/twitter/sekhmet/graphs/contributors?type=a) can be found on GitHub.
+
+Follow [@twitteross](https://twitter.com/twitteross) on Twitter for updates.
+
+## License
+
+Copyright 2013-2018 Twitter, Inc.
+
+Licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
+
+## Security Issues?
+
+Please report sensitive security issues via Twitter's bug-bounty program (https://hackerone.com/twitter) rather than GitHub.
+
 ##API
 
 The evaluation API contains a single, stateless POST request
@@ -1237,29 +1259,3 @@ Send an Evaluation Result payload to a URL
   "url": "http://localhost:8080/webhook"
 }
 ```
-
-## Contributing
-
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Support
-
-??? Twitter OSS Slack ???
-
-## Authors
-
-* Ian Bennett <https://github.com/enbnt>
-
-A full list of [contributors](https://github.com/twitter/sekhmet/graphs/contributors?type=a) can be found on GitHub.
-
-Follow [@twitteross](https://twitter.com/twitteross) on Twitter for updates.
-
-## License
-
-Copyright 2013-2018 Twitter, Inc.
-
-Licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
-
-## Security Issues?
-
-Please report sensitive security issues via Twitter's bug-bounty program (https://hackerone.com/twitter) rather than GitHub.
